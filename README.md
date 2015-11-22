@@ -1,5 +1,6 @@
 # Getting and Cleaning Data Project
 ## How the script works
+
 ## Read the activity labels and features
 The first step in the script reads the activity_labels and the features text files
 to use them later for labeling the Activity column with the value associated,
@@ -23,7 +24,9 @@ Subset only the columns mean and std using grepl
 * stat<-x[,grepl("mean[:(:]", colnames(x)) | grepl("std[:(:]", colnames(x))]
 
 ### Reading and binding the sets corresponding to activities and subjects
-###Read Activity Data
+
+Read Activity Data
+
 * y <- rbind(read.table("./test/y_test.txt"),read.table("./train/y_train.txt"))
 
 Set Labels instead of values using activity_labels.txt
@@ -38,9 +41,13 @@ Read  Subject Data
 
 ###Bind Columns Subject - Activity - Data and generate the Tidy set
 * dat <- cbind(s,y,stat)
+
 Get the average for the data set
+
 * tidy <- aggregate(dat[, -(1:2)], list(Subject=dat$Subject,Activity=dat$Activity), mean)
+
 Write the tidy data set
+
 * write.table(tidy, 'tidy.txt', row.name=FALSE)
 
 #CodeBook
